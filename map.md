@@ -18,8 +18,6 @@ https://blog.csdn.net/u013485792/article/details/52316512
 # Http协议
 
 
-
-
 ## Restful API 
 https://www.tutorialspoint.com/restful/index.htm
 https://docs.oracle.com/javaee/6/tutorial/doc/gijqy.html
@@ -42,8 +40,21 @@ memcache, redis ,mangoDB
 nginx + apache 
 
 
+# DB 
 
+关系型mysql
+非关系型 MangoDB 
+相关的有etcd 
 
+# Caching 缓存
+memcached
+redis 
+
+# DNS 
+
+- skyDns
+- kubeDNS
+- bind 
 
  
 
