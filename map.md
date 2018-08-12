@@ -36,26 +36,25 @@ Intellij IDEA：Java 开发最好的 IDE，这个是公认的，我一开始是�
   - java:Spring 
   - go:  Beego
 
-memcache, redis ,mangoDB
-nginx + apache 
+## DB 
 
+- 关系型mysql
+- 非关系型 MangoDB 
+- 相关的有etcd 
 
-# DB 
+## Caching 缓存
+- memcached
+- redis 
 
-关系型mysql
-非关系型 MangoDB 
-相关的有etcd 
-
-# Caching 缓存
-memcached
-redis 
-
-# DNS 
+## DNS 
 
 - skyDns
 - kubeDNS
 - bind 
 
- 
+ ## http server 
+- nginx 
+- apache
+
 
 
