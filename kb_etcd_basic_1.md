@@ -15,3 +15,40 @@ etcd主要分为四个部分:
 
 https://zhangchenchen.github.io/2017/08/05/intro-to-etcd/
 
+# Useful Operations
+
+```bash
+$ etcdctl -v
+etcdctl version: 3.2.5
+API version: 2
+$ ETCDCTL_API=3 etcdctl version
+etcdctl version: 3.2.5
+API version: 3.2
+
+[root@ose0 lib]# ps aux |grep etcd 
+etcd       1064  1.6  0.7 6021280 146848 ?      Ssl  Jul25 428:39 /usr/bin/etcd --name=ose0.cloud.genomics.cn --data-dir=/var/lib/etcd/ --listen-client-urls=https://192.168.122.245:2379
+root       2301  0.2  0.2 657380 47084 ?        Ssl  Jul25  73:46 /usr/bin/service-catalog apiserver --storage-type etcd --secure-port 6443 --etcd-servers https://ose0.cloud.genomics.cn:2379,https://ose1.cloud.genomics.cn:2379,https://ose2.cloud.genomics.cn:2379 --etcd-cafile /etc/origin/master/master.etcd-ca.crt --etcd-certfile /etc/origin/master/master.etcd-client.crt --etcd-keyfile /etc/origin/master/master.etcd-client.key -v 10 --cors-allowed-origins localhost --admission-control KubernetesNamespaceLifecycle,DefaultServicePlan,ServiceBindingsLifecycle,ServicePlanChangeValidator,BrokerAuthSarCheck --feature-gates OriginatingIdentity=true
+```
+
+先要弄懂几个概念：
+
+    member： 指一个 etcd 实例。member 运行在每个 node 上，并向这一 node上的其它应用程序提供服务。
+    Cluster： Cluster 由多个 member 组成。每个 member 中的 node 遵循 raft共识协议来复制日志。Cluster 接收来自 member的提案消息，将其提交并存储于本地磁盘。
+    Peer： 同一 Cluster 中的其它 member。
+
+
+```bash
+etcdctl -C $ENDPOINTS
+     --ca-file=/etc/origin/master/master.etcd-ca.crt \
+     --cert-file=/etc/origin/master/master.etcd-client.crt \
+     --key-file=/etc/origin/master/master.etcd-client.key cluster-health
+
+	
+
+[root@ose0 ~]# ./check_etcd_healthy.sh 
+member 2b56669455fce48a is healthy: got healthy result from https://192.168.122.14:2379
+member 8dadc959d0dca3e6 is healthy: got healthy result from https://192.168.122.245:2379
+member f7d2b4f063141c83 is healthy: got healthy result from https://192.168.122.124:2379
+cluster is healthy
+
+```
