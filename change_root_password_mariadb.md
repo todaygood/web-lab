@@ -36,3 +36,16 @@ MariaDB [mysql]> select user,host,password from user where user='root';
 ```
 
 这种情况，update 可以一下子就搞定， 而方法一，方法二都需要多次操作。
+
+
+# 在丢失root密码的时候
+```bash
+　　mysqld_safe --skip-grant-tables&
+
+　　mysql -u root mysql
+
+　　mysql> UPDATE user SET password=PASSWORD("new password") WHERE user='root';
+
+　　mysql> FLUSH PRIVILEGES;
+```
+
